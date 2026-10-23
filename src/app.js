@@ -8,6 +8,7 @@ import { logger } from './config/logger.js';
 import { errorHandler, notFoundHandler } from './middleware/errorHandler.js';
 import { authRouter } from './routes/auth.js';
 import { documentsRouter } from './routes/documents.js';
+import { aiRouter } from './routes/ai.js';
 
 export const app = express();
 
@@ -35,6 +36,7 @@ app.get('/health', healthHandler);
 app.get('/api/v1/health', healthHandler);
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/documents', documentsRouter);
+app.use('/api/v1/ai', aiRouter);
 
 app.use(notFoundHandler);
 app.use(errorHandler);

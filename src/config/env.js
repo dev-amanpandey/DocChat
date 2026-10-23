@@ -8,8 +8,13 @@ const envSchema = z.object({
   CLIENT_ORIGIN: z.string().url().default('http://localhost:5173'),
   JWT_SECRET: z.string().min(32, 'JWT_SECRET must be at least 32 characters'),
   JWT_EXPIRES_IN: z.string().min(1).default('1h'),
-  UPLOAD_DIR: z.string().min(1).default('./uploads'),
   MAX_UPLOAD_SIZE_MB: z.coerce.number().int().min(1).max(1024).default(20),
+  CLOUDINARY_CLOUD_NAME: z.string().min(1, 'CLOUDINARY_CLOUD_NAME is required'),
+  CLOUDINARY_API_KEY: z.string().min(1, 'CLOUDINARY_API_KEY is required'),
+  CLOUDINARY_API_SECRET: z.string().min(1, 'CLOUDINARY_API_SECRET is required'),
+  GEMINI_API_KEY: z.string().min(1).optional(),
+  GEMINI_EMBEDDING_DIMENSIONS: z.coerce.number().int().min(128).max(3072).default(768),
+  GEMINI_GENERATION_MODEL: z.string().min(1).default('gemini-3.6-flash'),
 });
 
 const parsedEnv = envSchema.safeParse(process.env);
